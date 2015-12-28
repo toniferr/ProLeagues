@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">League</string>
+    <string name="title1">CREA TU LIGA</string>
+    <string name="btn1">+</string>
+    <string name="title2">CONSULTA TUS LIGAS</string>
+    <string name="btn2">aqui</string>
+    <string name="btn3">ABOUT</string>
+    <string name="titleInsert">Crea aquí tu Liga</string>
+    <string name="nametitleInsert">Name</string>
+    <string name="teamstitleInsert">Number of teams</string>
+    <string name="nameInsert"></string>
+    <string name="teamsInsert"></string>
+    <string name="btnCancel">Cancel</string>
+    <string name="btnInsert">Insert</string>
+    <string name="aboutWebView">Insert</string>
+    <string name="delete">Delete</string>
+    <string name="salir">Salir</string>
+    <string name="atras">Atras</string>
+    <string name="opciones">Opciones</string>
+    <string name="consultLeague">Consulta tus Ligas</string>
+    <string name="about">About</string>
+    <string name="inputLeague">Crear Liga</string>
+</resources>

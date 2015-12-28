@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/opciones" android:title="@string/opciones">
+		<menu>
+			<item android:id="@+id/consultLeague" android:title="@string/consultLeague"/>
+			<item android:id="@+id/about" android:title="@string/about"/>
+		</menu>
+	</item>
+	<item android:id="@+id/atras" android:title="@string/atras"/>	
+    <item android:id="@+id/salir" android:title="@string/salir"/>
+</menu>

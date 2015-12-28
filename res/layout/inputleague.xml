@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:weightSum="1">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/titleInsert"
+            android:id="@+id/titleInsert" android:layout_gravity="center_horizontal|top" android:textSize="40dp"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="185dp" android:id="@+id/Lineayout" android:layout_weight="0.64"
+            android:layout_marginTop="60dp">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" android:layout_weight="0.5">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nametitleInsert"
+                    android:id="@+id/nametitleInsert" android:layout_gravity="center_horizontal"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:text="@string/nameInsert"
+                    android:ems="10"
+                    android:id="@+id/nameInsert" android:layout_gravity="center_vertical"
+                    />
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" android:layout_weight="0.5">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/teamstitleInsert"
+                    android:id="@+id/teamstitleInsert" android:layout_gravity="center_horizontal"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/teamsInsert" android:text="@string/teamsInsert"
+                    android:editable="false" android:numeric="integer"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btnCancel"
+                android:id="@+id/btnCancel" android:layout_gravity="center_vertical" android:layout_weight="0.5"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btnInsert"
+                android:id="@+id/btnInsert" android:layout_gravity="left|center_vertical" android:layout_weight="0.5"/>
+    </LinearLayout>
+</LinearLayout>
