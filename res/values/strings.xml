@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">League</string>
-    <string name="title1">CREA TU LIGA</string>
-    <string name="btn1">+</string>
-    <string name="title2">CONSULTA TUS LIGAS</string>
-    <string name="btn2">aqui</string>
-    <string name="btn3">ABOUT</string>
-    <string name="titleInsert">Crea aquí tu Liga</string>
-    <string name="nametitleInsert">Name</string>
-    <string name="teamstitleInsert">Number of teams</string>
+    <string name="app_name">ProLeagues</string>
+    <string name="inputLeague">Liga</string>
+    <string name="pageLeague">Página principal de la Liga</string>
+
+    <!--              input Liga                        -->
+    <string name="titleInsert">Crea tu Liga</string>
+    <string name="nametitleInsert">Nombre de Liga</string>
     <string name="nameInsert"></string>
+    <string name="teamstitleInsert">Numero de equipos</string>
     <string name="teamsInsert"></string>
     <string name="btnCancel">Cancel</string>
     <string name="btnInsert">Insert</string>
+
+    <!--            web views                           -->
     <string name="aboutWebView">Insert</string>
+    <string name="DevelopersWebView">Insert</string>
+
+    <!--            menu contextual                      -->
     <string name="delete">Delete</string>
+    <string name="irLiga">Ir a la Liga</string>
+
+    <!--               menu principal                    -->
     <string name="salir">Salir</string>
     <string name="atras">Atras</string>
-    <string name="opciones">Opciones</string>
-    <string name="consultLeague">Consulta tus Ligas</string>
+    <string name="info">Info</string>
     <string name="about">About</string>
-    <string name="inputLeague">Crear Liga</string>
+    <string name="developers">Developers</string>
 </resources>

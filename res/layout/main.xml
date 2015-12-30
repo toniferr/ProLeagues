@@ -1,45 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
-    <LinearLayout
-            android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+>
+    <ListView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title1"
-                android:id="@+id/title1" android:textSize="55dp" android:layout_gravity="center_horizontal"
-                android:textStyle="bold" android:layout_marginTop="40dp"/>
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btn1"
-                android:id="@+id/btn1" android:layout_gravity="center_horizontal" android:textStyle="bold"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/lItems" android:layout_weight="0.9" android:layout_margin="10dp"
+            android:choiceMode="none"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:layout_marginTop="50dp">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/title2"
-                  android:id="@+id/title2" android:textSize="25dp"
-                  android:textStyle="bold"
-                  android:layout_gravity="bottom|center_horizontal" android:layout_marginRight="10dp"/>
-        <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:layout_marginTop="10dp" android:layout_weight="0.1"
+            android:gravity="bottom|right">
+        <ImageButton
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btn2"
-                android:id="@+id/btn2"/>
+                android:id="@+id/btAdd" android:layout_gravity="right"
+                android:clickable="true" android:src="@android:drawable/ic_menu_edit"/>
     </LinearLayout>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn3"
-            android:id="@+id/btn3" android:layout_gravity="center_horizontal" android:layout_marginTop="60dp"
-            android:textSize="30dp"/>
 </LinearLayout>
 

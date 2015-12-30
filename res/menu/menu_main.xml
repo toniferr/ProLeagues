@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/creaLiga" android:title="@string/titleInsert"/>
+    <item android:id="@+id/info" android:title="@string/info">
+        <menu>
+            <item android:id="@+id/about" android:title="@string/about"/>
+            <item android:id="@+id/developers" android:title="@string/developers"/>
+        </menu>
+    </item>
     <item android:id="@+id/salir" android:title="@string/salir"/>
 </menu>

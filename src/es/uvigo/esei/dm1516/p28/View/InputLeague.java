@@ -1,9 +1,5 @@
 package es.uvigo.esei.dm1516.p28.View;
 
-/*
- * Clase que implementa la vista donde se introducen los datos para crear una liga
- */
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,67 +14,60 @@ import es.uvigo.esei.dm1516.p28.R;
 
 
 public class InputLeague extends Activity {
+    public static final String ETQ_NAME = "name";
+    public static final String ETQ_TEAMS = "teams";
 
-
-    /**
-     * Called when the activity is first created.
-     */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.inputleague);
+    public void onCreate(Bundle data) {
+        super.onCreate(data);
+        this.setContentView( R.layout.input_league );
 
-        /***********edittext*****************/
+        Button btSave = (Button) this.findViewById( R.id.btnInsert );
+        Button btCancel = (Button) this.findViewById( R.id.btnCancel );
+        final EditText nameleague = (EditText) this.findViewById( R.id.nameInsert );
+        final EditText teamsleague = (EditText) this.findViewById( R.id.teamsInsert );
 
-        EditText etname = (EditText) findViewById(R.id.nameInsert);
-        EditText etteams = (EditText) findViewById(R.id.teamsInsert);
-
-
-        /********boton cancelar***********/
-        Button btnCancel = (Button) findViewById(R.id.btnCancel);
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        /************boton cancelarr******************/
+        btCancel.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                InputLeague.this.setResult( RESULT_CANCELED );
+                InputLeague.this.finish();
             }
-        });
+        } );
 
-        /********boton crear liga***********/
-        Button btnInsert = (Button) findViewById(R.id.btnInsert);
-
-        btnInsert.setOnClickListener(new View.OnClickListener() {
+        /************boton insertar**********************/
+        btSave.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent data = new Intent();
+                String leaguename = nameleague.getText().toString().trim();  /**nombre de la liga**/
+                int leagueteams = Integer.parseInt(teamsleague.getText().toString());  /**numero de equipos**/
 
-                //String name = etname.getText().toString().trim();
-                //int teams = Integer.parseInt(etteams.getText().toString());
-
-                finish();
+                if ( !leaguename.isEmpty() || leagueteams > 0.0 )
+                {
+                    data.putExtra( ETQ_NAME, leaguename );
+                    data.putExtra( ETQ_TEAMS, leagueteams );
+                    InputLeague.this.setResult( RESULT_OK, data );
+                    InputLeague.this.finish();
+                } else {
+                    InputLeague.this.setResult( RESULT_CANCELED );
+                    InputLeague.this.finish();
+                }
             }
-        });
+        } );
     }
 
-    /***********menu barra superior, con tres casos: opciones abre dos subitems, atras mata la actividad y salir********************/
+    /***********menu barra superior con opciones de volver atras y salir********************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu( menu );
-        this.getMenuInflater().inflate( R.menu.menu_inputleague, menu );
+        this.getMenuInflater().inflate( R.menu.menu_info, menu );
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch ( menuItem.getItemId() ) {
-            case R.id.opciones:
-                break;
-                case R.id.consultLeague:
-                    Intent consultleagues= new Intent(getApplicationContext(), ConsultLeagues.class);
-                    startActivity(consultleagues);
-                    break;
-                case R.id.about:
-                    Intent about= new Intent(getApplicationContext(), About.class);
-                    startActivity(about);
-                    break;
             case R.id.atras:
                 finish();
                 break;
@@ -89,7 +78,7 @@ public class InputLeague extends Activity {
         return true;
     }
 
-    /*metodo del menu principal que nos muestra un dialogo en el que podemos cancelar o salir de la aplicación*/
+    /*metodo del menu principal que nos muestra un dialogo en el que podemos cancelar o salir de la aplicaciï¿½n*/
     public void exit(){
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
         builder.setTitle( "Salir de la aplicacion" );
@@ -102,5 +91,4 @@ public class InputLeague extends Activity {
         });
         builder.create().show();
     }
-
 }
