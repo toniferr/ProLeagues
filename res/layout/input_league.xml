@@ -11,9 +11,9 @@
             android:id="@+id/titleInsert" android:layout_gravity="center_horizontal|top" android:textSize="40dp"/>
     <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="185dp" android:id="@+id/Lineayout" android:layout_weight="0.64"
-            android:layout_marginTop="60dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/Lineayout" android:layout_weight="0.3"
+            android:layout_marginTop="20dp" android:layout_gravity="center_horizontal">
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
@@ -22,7 +22,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/nametitleInsert"
-                    android:id="@+id/nametitleInsert" android:layout_gravity="center_horizontal"/>
+                    android:id="@+id/nametitleInsert" android:layout_gravity="center_horizontal"
+                    android:textSize="20dp"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -36,24 +37,113 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" android:layout_weight="0.5">
+        </LinearLayout>
+    </LinearLayout>
+    <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:showDividers="beginning|end"
+            android:stretchColumns="1" android:layout_gravity="center_horizontal" android:layout_weight="0.7"
+            android:layout_marginLeft="50dp" android:layout_marginRight="50dp">
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/teamstitleInsert"
-                    android:id="@+id/teamstitleInsert" android:layout_gravity="center_horizontal"/>
-            <EditText
-                    android:layout_width="match_parent"
+                    android:text="Equipos"
+                    android:id="@+id/titleTeam" android:layout_column="0" android:textSize="20dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:ems="10"
-                    android:id="@+id/teamsInsert" android:text="@string/teamsInsert"
-                    android:editable="false" android:numeric="integer"/>
-        </LinearLayout>
-    </LinearLayout>
+                    android:text="Usuarios"
+                    android:id="@+id/titleUser" android:layout_column="2" android:textSize="20dp"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/team1" android:layout_column="0"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/user1" android:layout_column="2"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/team2" android:layout_column="0"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/user2" android:layout_column="2"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/team3" android:layout_column="0"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/user3" android:layout_column="2"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/team4" android:layout_column="0"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/user4" android:layout_column="2"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/team5" android:layout_column="0"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/user5" android:layout_column="2"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/team6" android:layout_column="0"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/user6" android:layout_column="2"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+        </TableRow>
+    </TableLayout>
     <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

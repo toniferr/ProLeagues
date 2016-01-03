@@ -7,13 +7,54 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:gravity="center_vertical|center_horizontal"
-            android:layout_weight="0.25">
+            android:layout_height="wrap_content" android:gravity="center_horizontal"
+            >
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="CLASIFICACIÓN DE LA LIGA "
+                android:id="@+id/textView" android:layout_gravity="center_horizontal" android:textSize="20dp"
+                android:layout_marginTop="10dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Large Text"
-                android:id="@+id/leagueName"/>
+                android:id="@+id/leagueName" android:textSize="20dp"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" android:layout_marginTop="30dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EQUIPO"
+                    android:id="@+id/lblEquipos" android:layout_marginLeft="10dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="--"
+                    android:id="@+id/textView2" android:layout_marginLeft="5dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PUNTOS"
+                    android:id="@+id/lblPuntos" android:layout_marginLeft="5dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="--"
+                    android:id="@+id/textView12" android:layout_marginLeft="5dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GOLAVERAGE"
+                    android:id="@+id/lblGolaverage" android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listTeams" android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </LinearLayout>

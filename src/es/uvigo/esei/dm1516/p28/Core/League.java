@@ -2,19 +2,12 @@ package es.uvigo.esei.dm1516.p28.Core;
 
 public class League {
 
-    private int teams;
     private String name;
 
-    public League(String name, int teams)
+    public League(String name)
     {
         this.name = name;
-        this.teams = teams;
     }
-
-    public int getTeams() {
-        return this.teams;
-    }
-
 
     public String getName() {
         return this.name;
@@ -23,6 +16,6 @@ public class League {
 
     @Override
     public String toString() {
-        return "Liga: "+this.name+" ("+this.teams+" equipos)";
+        return "Liga: "+this.name;
     }
 }

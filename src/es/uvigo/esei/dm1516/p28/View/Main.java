@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import es.uvigo.esei.dm1516.p28.Core.League;
 import es.uvigo.esei.dm1516.p28.Core.SqlIO;
+import es.uvigo.esei.dm1516.p28.Core.Team;
 import es.uvigo.esei.dm1516.p28.R;
 
 import java.util.List;
@@ -24,9 +25,7 @@ public class Main extends Activity {
     public static final String LOG_TAG = "Main";
     public final static int NEW_LEAGUE = 101;
 
-    /**
-     * Called when the activity is first created.
-     */
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -60,10 +59,6 @@ public class Main extends Activity {
             }
         } );
     }
-
-    /*****************************************************************************/
-
-
 
     /************menu contextual**********************************/
     @Override
@@ -141,8 +136,8 @@ public class Main extends Activity {
     public void exit(){
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
         builder.setTitle( "Salir de la aplicacion" );
-        builder.setPositiveButton( "Cancelar", null);
-        builder.setNegativeButton( "Salir", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton( "Cancelar", null);
+        builder.setPositiveButton("Salir", new DialogInterface.OnClickListener() {
             @Override
             public void  onClick(DialogInterface dlg, int i) {
                 System.exit( 0 );
@@ -176,7 +171,7 @@ public class Main extends Activity {
         Intent data = new Intent( this, PageLeague.class );
 
         data.putExtra( PageLeague.ETQ_NAME_LEAGUE, nameLeague );
-        Log.v( LOG_TAG, String.format( " in pageLeague(): launching league calculator for: '%s'", nameLeague ) );
+        Log.v( LOG_TAG, String.format( " in pageLeague(): launching league for: '%s'", nameLeague ) );
         this.startActivity( data );
     }
 
@@ -191,16 +186,26 @@ public class Main extends Activity {
             if ( requestCode == NEW_LEAGUE ) {
                 SqlIO db = ( (App) this.getApplication() ).getDb();
 
-                League league = new League(
-                                intent.getExtras().getString( InputLeague.ETQ_NAME ),
-                                intent.getExtras().getInt(InputLeague.ETQ_TEAMS) );
+                League league = new League( intent.getExtras().getString( InputLeague.ETQ_NAME ) );
 
                 db.add( league );
+
+                Team team1 = new Team (intent.getExtras().getString(InputLeague.ETQ_T1), intent.getExtras().getString(InputLeague.ETQ_U1), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
+                Team team2 = new Team (intent.getExtras().getString(InputLeague.ETQ_T2), intent.getExtras().getString(InputLeague.ETQ_U2), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
+                Team team3 = new Team (intent.getExtras().getString(InputLeague.ETQ_T3), intent.getExtras().getString(InputLeague.ETQ_U3), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
+                Team team4 = new Team (intent.getExtras().getString(InputLeague.ETQ_T4), intent.getExtras().getString(InputLeague.ETQ_U4), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
+                Team team5 = new Team (intent.getExtras().getString(InputLeague.ETQ_T5), intent.getExtras().getString(InputLeague.ETQ_U5), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
+                Team team6 = new Team (intent.getExtras().getString(InputLeague.ETQ_T6), intent.getExtras().getString(InputLeague.ETQ_U6), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
+                db.addTeam(team1);
+                db.addTeam(team2);
+                db.addTeam(team3);
+                db.addTeam(team4);
+                db.addTeam(team5);
+                db.addTeam(team6);
                 this.listItems.add( league );
                 ( (ArrayAdapter) lItems.getAdapter() ).notifyDataSetChanged();
             }
         }
-
         return;
     }
 

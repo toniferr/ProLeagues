@@ -64,25 +64,8 @@ public class Developers extends Activity {
             case R.id.atras:
                 finish();
                 break;
-            case R.id.salir:
-                exit();
-                break;
         }
         return true;
-    }
-
-    /*metodo del menu principal que nos muestra un dialogo en el que podemos cancelar o salir de la aplicaci�n*/
-    public void exit(){
-        AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setTitle( "Salir de la aplicacion" );
-        builder.setPositiveButton( "Cancelar", null);
-        builder.setNegativeButton( "Salir", new DialogInterface.OnClickListener() {
-            @Override
-            public void  onClick(DialogInterface dlg, int i) {
-                System.exit( 0 );
-            }
-        });
-        builder.create().show();
     }
 
 }

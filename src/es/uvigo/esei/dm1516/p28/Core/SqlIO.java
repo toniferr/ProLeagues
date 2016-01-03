@@ -44,8 +44,15 @@ public class SqlIO extends SQLiteOpenHelper {
 
         try {
             db.execSQL( "CREATE TABLE IF NOT EXISTS league("
-                    + "name string(255) PRIMARY KEY,"
-                    + "teams int NOT NULL"
+                    + "name string(255) PRIMARY KEY"
+                    + ")"  );
+
+            db.execSQL( "CREATE TABLE IF NOT EXISTS team("
+                    + "nameTeam string(255) PRIMARY KEY,"
+                    + "user string(255) NOT NULL,"
+                    + "points int,"
+                    + "gv int,"
+                    + "nameLeague string FOREIGNKEY REFERENCES league(name) ON DELETE CASCADE"
                     + ")"  );
 
             db.setTransactionSuccessful();
@@ -62,6 +69,7 @@ public class SqlIO extends SQLiteOpenHelper {
 
         try {
             db.execSQL( "DROP TABLE IF EXISTS league" );
+            db.execSQL( "DROP TABLE IF EXISTS team" );
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -80,7 +88,23 @@ public class SqlIO extends SQLiteOpenHelper {
 
         if ( cursor.moveToFirst() ) {
             do {
-                toret.add( new League( cursor.getString( 0 ), cursor.getInt( 1 ) ) );
+                toret.add( new League( cursor.getString( 0 )) );
+            } while( cursor.moveToNext()  );
+        }
+
+        return toret;
+    }
+
+
+    public List<Team> getAllTeams(String nameLeague)
+    {
+        ArrayList<Team> toret = new ArrayList<>();
+        Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM team WHERE nameLeague=? ORDER BY points,gv",
+                    new String[] { nameLeague } );
+
+        if ( cursor.moveToFirst() ) {
+            do {
+                toret.add( new Team( cursor.getString( 0 ), cursor.getString( 1 ),cursor.getInt( 2 ),cursor.getInt( 3 ), cursor.getString( 4 ) ) );
             } while( cursor.moveToNext()  );
         }
 
@@ -94,14 +118,30 @@ public class SqlIO extends SQLiteOpenHelper {
     }
 
 
+
     /***********************insert*******************************************************************/
     public void add(League league) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.beginTransaction();
         try {
-            db.execSQL( "INSERT INTO league(name, teams) VALUES(?, ?)",
-                    new String[] { league.getName(), Integer.toString( league.getTeams() ) } );
+            db.execSQL( "INSERT INTO league(name) VALUES(?)",
+                    new String[] { league.getName() } );
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+
+        return;
+    }
+
+
+   public void addTeam(Team team) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        try {
+            db.execSQL( "INSERT INTO team(nameTeam, user, points, gv, nameLeague) VALUES(?, ?, ?, ?, ?)",
+                    new String[] { team.getName(), team.getUser(), Integer.toString(team.getPoints()), Integer.toString(team.getGolaverage()), team.getNameLeague() } );
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -121,7 +161,7 @@ public class SqlIO extends SQLiteOpenHelper {
                 new String[]{ nameLeague } );
 
         if ( cursor.moveToFirst() ) {
-            toret = new League( cursor.getString( 0 ), cursor.getInt( 1 ) );
+            toret = new League( cursor.getString( 0 ) );
         }
 
         return toret;
@@ -144,4 +184,6 @@ public class SqlIO extends SQLiteOpenHelper {
 
         return;
     }
+
+
 }

@@ -18,7 +18,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btAdd" android:layout_gravity="right"
-                android:clickable="true" android:src="@android:drawable/ic_menu_edit"/>
+                android:clickable="true" android:src="@android:drawable/ic_input_add"/>
     </LinearLayout>
 </LinearLayout>
 
