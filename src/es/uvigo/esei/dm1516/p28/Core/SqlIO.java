@@ -59,8 +59,8 @@ public class SqlIO extends SQLiteOpenHelper {
                     + "localTeam string(50),"
                     + "visitTeam string(50),"
                     + "matchDay int NOT NULL,"
-                    + "localGoal int,"
-                    + "visitGoal int,"
+                    + "localGoals int,"
+                    + "visitGoals int,"
                     + "PRIMARY KEY (localTeam, visitTeam)"
                     + ")" );
 
@@ -123,16 +123,24 @@ public class SqlIO extends SQLiteOpenHelper {
     }
 
 
-    /************************cuenta todos los items*************************************************/
-    public int getCountItems() {
-        return this.getReadableDatabase().rawQuery( "SELECT * FROM league", null ).getCount();
+    /************************cuenta todos los equipos de una liga*************************************************/
+
+    public int getCountTeams(String league) {
+        return this.getReadableDatabase().rawQuery( "SELECT * FROM team WHERE nameLeague=?", new String[] { league }  ).getCount();
     }
 
-    public int getCountTeams() {
-        return this.getReadableDatabase().rawQuery( "SELECT * FROM team", null ).getCount();
+    /************************todos los nombres de equipos de una liga*************************************************/
+    public ArrayList<String> getNameTeams(String league) {
+        ArrayList<String> toret = new ArrayList<>();
+        Cursor cursor = this.getReadableDatabase().rawQuery( "SELECT * FROM team WHERE nameLeague=?", new String[] { league }  );
+        if ( cursor.moveToFirst() ) {
+            do {
+                toret.add(cursor.getString( 0 ));
+            } while( cursor.moveToNext()  );
+        }
+
+        return toret;
     }
-
-
 
     /***********************insert*******************************************************************/
     public void add(League league) {

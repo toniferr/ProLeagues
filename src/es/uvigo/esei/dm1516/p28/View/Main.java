@@ -15,10 +15,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import es.uvigo.esei.dm1516.p28.Core.League;
+import es.uvigo.esei.dm1516.p28.Core.Match;
 import es.uvigo.esei.dm1516.p28.Core.SqlIO;
 import es.uvigo.esei.dm1516.p28.Core.Team;
 import es.uvigo.esei.dm1516.p28.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends Activity {
@@ -217,13 +219,154 @@ public class Main extends Activity {
                     db.addTeam(team6);
                }
 
+                /***************crear emparejamiento***************/
+                int numEquipos = db.getCountTeams(intent.getExtras().getString(InputLeague.ETQ_NAME));
+                ArrayList<String> equipos = db.getNameTeams(intent.getExtras().getString(InputLeague.ETQ_NAME));
 
+                ArrayList<String> calendario = crearEmparejamientos(numEquipos, equipos);
+
+
+                int i = 0;
+                int j = 0;
+                int totalJP = numEquipos;
+
+                boolean impar = (totalJP%2 != 0);
+                if (impar){ --totalJP; }
+
+                String localteam="";
+                String visitteam="";
+                int jornada = 0;
+                for (String partido: calendario){
+                    if ((totalJP*j) == i){
+                        jornada = j+1;
+                        j++;
+                    }
+                    if ((i%2) == 0){
+                        localteam = partido;
+                    }else{
+                        visitteam = partido;
+                        Match match = new Match(localteam, visitteam, jornada, 0, 0 );
+                        db.addMatch(match);
+                    }
+
+                    i++;
+                }
+
+                /*******jornada1****/
+                /*Match match1j1 = new Match();
+                Match match2j1 = new Match();
+                Match match3j1 = new Match();*/
+                /*******jornada2****/
+                /*Match match1j2 = new Match();
+                Match match2j2 = new Match();
+                Match match3j2 = new Match();*/
+                /*******jornada3****/
+                /*Match match1j3 = new Match();
+                Match match2j3 = new Match();
+                Match match3j3 = new Match();*/
+                /*******jornada4****/
+                /*Match match1j4 = new Match();
+                Match match2j4 = new Match();
+                Match match3j4 = new Match();*/
+                /*******jornada5****/
+                /*Match match1j5 = new Match();
+                Match match2j5 = new Match();
+                Match match3j5 = new Match();*/
+                /*******jornada6****/
+                /*Match match1j6 = new Match();
+                Match match2j6 = new Match();
+                Match match3j6 = new Match();*/
+                /*******jornada7****/
+                /*Match match1j7 = new Match();
+                Match match2j7 = new Match();
+                Match match3j7 = new Match();*/
+                /*******jornada8****/
+                /*Match match1j8 = new Match();
+                Match match2j8 = new Match();
+                Match match3j8 = new Match();*/
+                /*******jornada9****/
+                /*Match match1j9 = new Match();
+                Match match2j9 = new Match();
+                Match match3j9 = new Match();*/
+                /*******jornada10****/
+                /*Match match1j10 = new Match();
+                Match match2j10 = new Match();
+                Match match3j10 = new Match();*/
 
                 this.listItems.add( league );
                 ( (ArrayAdapter) lItems.getAdapter() ).notifyDataSetChanged();
             }
         }
         return;
+    }
+
+
+
+    public ArrayList<String> crearEmparejamientos (int tope, ArrayList<String> clubes){
+
+                //int tope numero de clubes
+                //ArrayList <String> clubes array con los nombres de todos los clubes de la liga
+
+                ArrayList <String> toret = new ArrayList<String>();
+                boolean impar =(tope%2!=0);
+                if(impar){
+                    ++tope;
+                }
+
+                int totalP=(tope*(tope-1))/2;//total de partidos de una ronda
+
+                String [] local=new String [totalP];
+                String [] visita=new String [totalP];
+
+                int modIF=(tope/2);//para hacer mod cada inicio de fecha
+                int indiceInverso=tope-2;
+                for(int i=0;i<totalP;i++){
+                    if (i%modIF==0){//seria el partido inicial de cada fecha
+                        //si es impar el numero de clubes la primera fecha se borra poniendo null
+                        if (impar){
+                            local[i]=null;
+                            visita[i]=null;
+                        }
+                        else{
+                            //se pone uno local otro visita al ultimo equipo
+                            if(i%2==0){
+                                local[i]=clubes.get(i%(tope-1));
+                                visita[i]=clubes.get(tope-1);
+                            }
+                            else{
+                                local[i]=clubes.get(tope-1);
+                                visita[i]=clubes.get(i%(tope-1));
+                            }
+                        }
+                    }
+                    else{
+                        local[i]=clubes.get(i%(tope-1));
+                        visita[i]=clubes.get(indiceInverso);
+                        --indiceInverso;
+                        if (indiceInverso<0){
+                            indiceInverso=tope-2;
+                        }
+                    }
+                }
+
+                //Ida
+
+                for(int i=0;i<totalP;i++){
+                    if(local[i]!=null){
+                        toret.add(local[i]);
+                        toret.add(visita[i]);
+                    }
+                }
+                //Vuelta
+
+                for(int i=0;i<totalP;i++){
+                    if(local[i]!=null){
+                        toret.add(visita[i]);
+                        toret.add(local[i]);
+                    }
+                }
+                return toret;
+
     }
 
 

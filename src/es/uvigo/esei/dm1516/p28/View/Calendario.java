@@ -3,6 +3,8 @@ package es.uvigo.esei.dm1516.p28.View;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -188,8 +190,23 @@ public class Calendario extends Activity {
 
 
 
-        /**botones de equipos y usuarios**************/
-        EditText user1 = (EditText) this.findViewById( R.id.user1 );
+    }
+
+    /***********menu barra superior con opciones de volver atras y salir********************/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu( menu );
+        this.getMenuInflater().inflate( R.menu.menu_info, menu );
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch ( menuItem.getItemId() ) {
+            case R.id.atras:
+                finish();
+                break;
+        }
+        return true;
     }
 
 }
