@@ -9,16 +9,16 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" android:gravity="center_horizontal"
             >
-        <TextView
+       <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CLASIFICACIÓN DE LA LIGA "
-                android:id="@+id/textView" android:layout_gravity="center_horizontal" android:textSize="20dp"
+                android:id="@+id/clasificacion" android:layout_gravity="center_horizontal" android:textSize="20dp"
                 android:layout_marginTop="10dp"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Large Text"
+                android:text="Liga"
                 android:id="@+id/leagueName" android:textSize="20dp"/>
         <LinearLayout
                 android:orientation="horizontal"

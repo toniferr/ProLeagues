@@ -26,6 +26,12 @@
     <string name="about">About</string>
     <string name="developers">Developers</string>
 
+    <!--                pageLeague                         -->
+    <string name="leagueName">Liga</string>
+
+    <!--                calendario                         -->
+    <string name="calendario">Calendario</string>
+
     <!--              jornadas                           -->
     <string name="jornada1">Jornada 1</string>
     <string name="jornada2">Jornada 2</string>

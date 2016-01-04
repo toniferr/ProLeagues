@@ -44,16 +44,26 @@ public class SqlIO extends SQLiteOpenHelper {
 
         try {
             db.execSQL( "CREATE TABLE IF NOT EXISTS league("
-                    + "name string(255) PRIMARY KEY"
+                    + "name string(15) PRIMARY KEY"
                     + ")"  );
 
             db.execSQL( "CREATE TABLE IF NOT EXISTS team("
-                    + "nameTeam string(255) PRIMARY KEY,"
-                    + "user string(255) NOT NULL,"
+                    + "nameTeam string(50) PRIMARY KEY,"
+                    + "user string(50) NOT NULL,"
                     + "points int,"
                     + "gv int,"
                     + "nameLeague string FOREIGNKEY REFERENCES league(name) ON DELETE CASCADE"
                     + ")"  );
+
+            db.execSQL( "CREATE TABLE IF NOT EXISTS match("
+                    + "localTeam string(50),"
+                    + "visitTeam string(50),"
+                    + "matchDay int NOT NULL,"
+                    + "localGoal int,"
+                    + "visitGoal int,"
+                    + "PRIMARY KEY (localTeam, visitTeam)"
+                    + ")" );
+
 
             db.setTransactionSuccessful();
         } finally {
@@ -70,6 +80,7 @@ public class SqlIO extends SQLiteOpenHelper {
         try {
             db.execSQL( "DROP TABLE IF EXISTS league" );
             db.execSQL( "DROP TABLE IF EXISTS team" );
+            db.execSQL( "DROP TABLE IF EXISTS match" );
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -117,6 +128,10 @@ public class SqlIO extends SQLiteOpenHelper {
         return this.getReadableDatabase().rawQuery( "SELECT * FROM league", null ).getCount();
     }
 
+    public int getCountTeams() {
+        return this.getReadableDatabase().rawQuery( "SELECT * FROM team", null ).getCount();
+    }
+
 
 
     /***********************insert*******************************************************************/
@@ -142,6 +157,20 @@ public class SqlIO extends SQLiteOpenHelper {
         try {
             db.execSQL( "INSERT INTO team(nameTeam, user, points, gv, nameLeague) VALUES(?, ?, ?, ?, ?)",
                     new String[] { team.getName(), team.getUser(), Integer.toString(team.getPoints()), Integer.toString(team.getGolaverage()), team.getNameLeague() } );
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+
+        return;
+    }
+
+    public void addMatch(Match match) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        try {
+            db.execSQL( "INSERT INTO match(localTeam, visitTeam, matchDay, localGoals, visitGoals) VALUES(?, ?, ?, ?, ?)",
+                    new String[] { match.getLocalTeam(), match.getVisitTeam(), Integer.toString(match.getMatchDay()), Integer.toString(match.getLocalGoals()), Integer.toString(match.getVisitGoals())} );
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();

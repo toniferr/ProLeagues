@@ -13,5 +13,6 @@
         <activity android:name=".View.PageLeague" android:label="@string/pageLeague" />
         <activity android:name=".View.About" android:label="@string/about" />
         <activity android:name=".View.Developers" android:label="@string/developers" />
+        <activity android:name=".View.Calendario" android:label="@string/calendario" />
     </application>
 </manifest>

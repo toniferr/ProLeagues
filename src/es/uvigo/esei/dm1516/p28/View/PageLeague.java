@@ -1,6 +1,7 @@
 package es.uvigo.esei.dm1516.p28.View;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,11 +24,13 @@ public class PageLeague extends Activity {
         super.onCreate( data );
         this.setContentView( R.layout.page_league );
 
+
+
         TextView leagueName = (TextView) this.findViewById( R.id.leagueName );
         this.league = ( (App ) this.getApplication() ).getDb().getByName(
                                                 this.getIntent().getExtras().getString( ETQ_NAME_LEAGUE ) );
 
-        leagueName.setText( league.getName() );
+        leagueName.setText(leagueName.getText() + " " + league.getName() );
 
         ListView lItems = (ListView) this.findViewById( R.id.listTeams );
 
@@ -53,41 +56,15 @@ public class PageLeague extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu( menu );
-        this.getMenuInflater().inflate( R.menu.menu_jornadas, menu );
+        this.getMenuInflater().inflate( R.menu.menu_pageleague, menu );
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch ( menuItem.getItemId() ) {
-            case R.id.jornada1:
-                finish();
-                break;
-            case R.id.jornada2:
-                finish();
-                break;
-            case R.id.jornada3:
-                finish();
-                break;
-            case R.id.jornada4:
-                finish();
-                break;
-            case R.id.jornada5:
-                finish();
-                break;
-            case R.id.jornada6:
-                finish();
-                break;
-            case R.id.jornada7:
-                finish();
-                break;
-            case R.id.jornada8:
-                finish();
-                break;
-            case R.id.jornada9:
-                finish();
-                break;
-            case R.id.jornada10:
-                finish();
+            case R.id.Calendario:
+                Intent calendar= new Intent(getApplicationContext(), Calendario.class);
+                startActivity(calendar);
                 break;
             case R.id.atras:
                 finish();

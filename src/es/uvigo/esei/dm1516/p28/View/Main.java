@@ -196,12 +196,29 @@ public class Main extends Activity {
                 Team team4 = new Team (intent.getExtras().getString(InputLeague.ETQ_T4), intent.getExtras().getString(InputLeague.ETQ_U4), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
                 Team team5 = new Team (intent.getExtras().getString(InputLeague.ETQ_T5), intent.getExtras().getString(InputLeague.ETQ_U5), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
                 Team team6 = new Team (intent.getExtras().getString(InputLeague.ETQ_T6), intent.getExtras().getString(InputLeague.ETQ_U6), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
-                db.addTeam(team1);
-                db.addTeam(team2);
-                db.addTeam(team3);
-                db.addTeam(team4);
-                db.addTeam(team5);
-                db.addTeam(team6);
+
+
+               if (!intent.getExtras().getString(InputLeague.ETQ_T1).isEmpty()) {
+                   db.addTeam(team1);
+               }
+               if (!intent.getExtras().getString(InputLeague.ETQ_T2).isEmpty()) {
+                    db.addTeam(team2);
+               }
+               if (!intent.getExtras().getString(InputLeague.ETQ_T3).isEmpty()) {
+                    db.addTeam(team3);
+               }
+               if (!intent.getExtras().getString(InputLeague.ETQ_T4).isEmpty()) {
+                    db.addTeam(team4);
+               }
+               if (!intent.getExtras().getString(InputLeague.ETQ_T5).isEmpty()) {
+                    db.addTeam(team5);
+               }
+               if (!intent.getExtras().getString(InputLeague.ETQ_T6).isEmpty()) {
+                    db.addTeam(team6);
+               }
+
+
+
                 this.listItems.add( league );
                 ( (ArrayAdapter) lItems.getAdapter() ).notifyDataSetChanged();
             }
