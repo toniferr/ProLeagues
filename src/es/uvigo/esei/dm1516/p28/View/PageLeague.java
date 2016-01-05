@@ -71,6 +71,13 @@ public class PageLeague extends Activity {
                 Log.v(LOG_TAG, String.format(" in pageLeague(): launching league for: '%s'", nameLeague));
                 this.startActivity(data);
                 break;
+            case R.id.Resultados:
+                String nameLeague2 = league.getName() ;
+                Intent data2 = new Intent( this, Resultados.class );
+                data2.putExtra( Resultados.ETQ_NAME_LEAGUE, nameLeague2 );
+                Log.v(LOG_TAG, String.format(" in pageLeague(): launching league for: '%s'", nameLeague2));
+                this.startActivity(data2);
+                break;
             case R.id.atras:
                 finish();
                 break;

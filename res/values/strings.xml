@@ -32,6 +32,9 @@
     <!--                calendario                         -->
     <string name="calendario">Calendario</string>
 
+    <!--                calendario                         -->
+    <string name="resultados">Calendario</string>
+
     <!--              jornadas                           -->
     <string name="jornada1">Jornada 1</string>
     <string name="jornada2">Jornada 2</string>

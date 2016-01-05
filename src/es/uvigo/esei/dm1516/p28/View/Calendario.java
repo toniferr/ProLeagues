@@ -5,10 +5,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.TextView;
 import es.uvigo.esei.dm1516.p28.Core.Match;
 import es.uvigo.esei.dm1516.p28.Core.SqlIO;
@@ -320,48 +316,7 @@ public class Calendario extends Activity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
-
-
 
     /***********menu barra superior con opciones de volver atras y salir********************/
     @Override
