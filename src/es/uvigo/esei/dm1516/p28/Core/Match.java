@@ -7,14 +7,16 @@ public class Match {
     private int matchDay;
     private int localGoals;
     private int visitGoals;
+    private String nameLeague;
 
 
-    public Match(String localTeam, String visitTeam, int matchDay, int localGoals, int visitGoals) {
+    public Match(String localTeam, String visitTeam, int matchDay, int localGoals, int visitGoals, String nameLeague) {
         this.localTeam = localTeam;
         this.visitTeam = visitTeam;
         this.matchDay = matchDay;
         this.localGoals = localGoals;
         this.visitGoals = visitGoals;
+        this.nameLeague = nameLeague;
     }
 
 
@@ -37,4 +39,6 @@ public class Match {
     public int getVisitGoals() {
         return visitGoals;
     }
+
+    public String getNameLeague() { return  nameLeague; }
 }

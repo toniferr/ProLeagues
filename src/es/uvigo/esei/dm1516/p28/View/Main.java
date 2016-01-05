@@ -245,7 +245,7 @@ public class Main extends Activity {
                         localteam = partido;
                     }else{
                         visitteam = partido;
-                        Match match = new Match(localteam, visitteam, jornada, 0, 0 );
+                        Match match = new Match(localteam, visitteam, jornada, 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
                         db.addMatch(match);
                     }
 

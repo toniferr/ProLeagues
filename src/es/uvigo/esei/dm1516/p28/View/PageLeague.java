@@ -3,6 +3,7 @@ package es.uvigo.esei.dm1516.p28.View;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class PageLeague extends Activity {
     public static final String ETQ_NAME_LEAGUE = "name_league";
+    public static final String LOG_TAG = "Main";
 
     private League league;
 
@@ -63,8 +65,11 @@ public class PageLeague extends Activity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch ( menuItem.getItemId() ) {
             case R.id.Calendario:
-                Intent calendar= new Intent(getApplicationContext(), Calendario.class);
-                startActivity(calendar);
+                String nameLeague = league.getName() ;
+                Intent data = new Intent( this, Calendario.class );
+                data.putExtra( Calendario.ETQ_NAME_LEAGUE, nameLeague );
+                Log.v(LOG_TAG, String.format(" in pageLeague(): launching league for: '%s'", nameLeague));
+                this.startActivity(data);
                 break;
             case R.id.atras:
                 finish();
@@ -73,7 +78,7 @@ public class PageLeague extends Activity {
         return true;
     }
 
-    /*****************lista de hipotecas****************************/
+    /*****************lista de equipos****************************/
     List<Team> listTeams;
 
 

@@ -61,6 +61,7 @@ public class SqlIO extends SQLiteOpenHelper {
                     + "matchDay int NOT NULL,"
                     + "localGoals int,"
                     + "visitGoals int,"
+                    + "nameLeague string,"
                     + "PRIMARY KEY (localTeam, visitTeam)"
                     + ")" );
 
@@ -130,6 +131,7 @@ public class SqlIO extends SQLiteOpenHelper {
     }
 
     /************************todos los nombres de equipos de una liga*************************************************/
+
     public ArrayList<String> getNameTeams(String league) {
         ArrayList<String> toret = new ArrayList<>();
         Cursor cursor = this.getReadableDatabase().rawQuery( "SELECT * FROM team WHERE nameLeague=?", new String[] { league }  );
@@ -141,6 +143,7 @@ public class SqlIO extends SQLiteOpenHelper {
 
         return toret;
     }
+
 
     /***********************insert*******************************************************************/
     public void add(League league) {
@@ -158,34 +161,36 @@ public class SqlIO extends SQLiteOpenHelper {
         return;
     }
 
+    /************************añadir equipo*********************************************************************/
+       public void addTeam(Team team) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.beginTransaction();
+            try {
+                db.execSQL( "INSERT INTO team(nameTeam, user, points, gv, nameLeague) VALUES(?, ?, ?, ?, ?)",
+                        new String[] { team.getName(), team.getUser(), Integer.toString(team.getPoints()), Integer.toString(team.getGolaverage()), team.getNameLeague() } );
+                db.setTransactionSuccessful();
+            } finally {
+                db.endTransaction();
+            }
 
-   public void addTeam(Team team) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.beginTransaction();
-        try {
-            db.execSQL( "INSERT INTO team(nameTeam, user, points, gv, nameLeague) VALUES(?, ?, ?, ?, ?)",
-                    new String[] { team.getName(), team.getUser(), Integer.toString(team.getPoints()), Integer.toString(team.getGolaverage()), team.getNameLeague() } );
-            db.setTransactionSuccessful();
-        } finally {
-            db.endTransaction();
+            return;
         }
 
-        return;
-    }
 
-    public void addMatch(Match match) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.beginTransaction();
-        try {
-            db.execSQL( "INSERT INTO match(localTeam, visitTeam, matchDay, localGoals, visitGoals) VALUES(?, ?, ?, ?, ?)",
-                    new String[] { match.getLocalTeam(), match.getVisitTeam(), Integer.toString(match.getMatchDay()), Integer.toString(match.getLocalGoals()), Integer.toString(match.getVisitGoals())} );
-            db.setTransactionSuccessful();
-        } finally {
-            db.endTransaction();
+            /***********************añadir partido **************************************/
+        public void addMatch(Match match) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.beginTransaction();
+            try {
+                db.execSQL( "INSERT INTO match(localTeam, visitTeam, matchDay, localGoals, visitGoals, nameLeague) VALUES(?, ?, ?, ?, ?, ?)",
+                        new String[] { match.getLocalTeam(), match.getVisitTeam(), Integer.toString(match.getMatchDay()), Integer.toString(match.getLocalGoals()), Integer.toString(match.getVisitGoals()), match.getNameLeague()} );
+                db.setTransactionSuccessful();
+            } finally {
+                db.endTransaction();
+            }
+
+            return;
         }
-
-        return;
-    }
 
 
     public League getByName(String nameLeague)
@@ -204,6 +209,23 @@ public class SqlIO extends SQLiteOpenHelper {
         return toret;
     }
 
+    /***********extraer partidos de jornadas**********************************************/
+    public ArrayList<Match> getPartidos(String nameLeague, int jornada){
+        ArrayList<Match> toret= new ArrayList<Match>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM match WHERE nameLeague = ? AND matchDay = ?",
+                new String[]{ nameLeague , Integer.toString(jornada)} );
+
+        if ( cursor.moveToFirst() ) {
+            do {
+                toret.add( new Match( cursor.getString( 0 ),cursor.getString( 1 ),cursor.getInt(2),cursor.getInt(3),cursor.getInt(4),cursor.getString( 5 ) ));
+            } while( cursor.moveToNext()  );
+        }
+
+        return toret;
+    }
 
     /********************delete league*************************************************/
     public void remove(League league)
