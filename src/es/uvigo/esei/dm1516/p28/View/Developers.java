@@ -1,8 +1,6 @@
 package es.uvigo.esei.dm1516.p28.View;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,9 +14,7 @@ import java.io.InputStreamReader;
 
 
 public class Developers extends Activity {
-    /**
-     * Called when the activity is first created.
-     */
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +35,7 @@ public class Developers extends Activity {
         try {
             String line;
 
-            InputStream in = this.getAssets().open("developers.html");
+            InputStream in = this.getAssets().open("app.html");
             BufferedReader inf = new BufferedReader( new InputStreamReader(in));
 
             while ( (line=inf.readLine()) != null) {

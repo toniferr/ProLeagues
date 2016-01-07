@@ -13,7 +13,6 @@ public class League {
         return this.name;
     }
 
-
     @Override
     public String toString() {
         return "Liga: "+this.name;

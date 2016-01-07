@@ -24,7 +24,8 @@
     <string name="atras">Atras</string>
     <string name="info">Info</string>
     <string name="about">About</string>
-    <string name="developers">Developers</string>
+    <string name="developers">App</string>
+    <string name="actualizar">Actualizar</string>
 
     <!--                pageLeague                         -->
     <string name="leagueName">Liga</string>
@@ -32,19 +33,9 @@
     <!--                calendario                         -->
     <string name="calendario">Calendario</string>
 
-    <!--                calendario                         -->
-    <string name="resultados">Calendario</string>
+    <!--                resultados                         -->
+    <string name="resultados">Resultados</string>
 
-    <!--              jornadas                           -->
-    <string name="jornada1">Jornada 1</string>
-    <string name="jornada2">Jornada 2</string>
-    <string name="jornada3">Jornada 3</string>
-    <string name="jornada4">Jornada 4</string>
-    <string name="jornada5">Jornada 5</string>
-    <string name="jornada6">Jornada 6</string>
-    <string name="jornada7">Jornada 7</string>
-    <string name="jornada8">Jornada 8</string>
-    <string name="jornada9">Jornada 9</string>
-    <string name="jornada10">Jornada 10</string>
+
 
 </resources>

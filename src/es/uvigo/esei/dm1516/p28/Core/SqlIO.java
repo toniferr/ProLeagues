@@ -61,6 +61,7 @@ public class SqlIO extends SQLiteOpenHelper {
                     + "matchDay int NOT NULL,"
                     + "localGoals int,"
                     + "visitGoals int,"
+                    + "finalizado int,"
                     + "nameLeague string,"
                     + "PRIMARY KEY (localTeam, visitTeam)"
                     + ")" );
@@ -111,7 +112,7 @@ public class SqlIO extends SQLiteOpenHelper {
     public List<Team> getAllTeams(String nameLeague)
     {
         ArrayList<Team> toret = new ArrayList<>();
-        Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM team WHERE nameLeague=? ORDER BY points,gv",
+        Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM team WHERE nameLeague=? ORDER BY points DESC, gv DESC",
                     new String[] { nameLeague } );
 
         if ( cursor.moveToFirst() ) {
@@ -161,6 +162,10 @@ public class SqlIO extends SQLiteOpenHelper {
         return;
     }
 
+    public int checkLeague(League league){
+        return this.getReadableDatabase().rawQuery( "SELECT * FROM league WHERE name=?", new String[] { league.getName() }  ).getCount();
+    }
+
     /************************añadir equipo*********************************************************************/
        public void addTeam(Team team) {
             SQLiteDatabase db = this.getWritableDatabase();
@@ -176,14 +181,18 @@ public class SqlIO extends SQLiteOpenHelper {
             return;
         }
 
+        public int checkTeam(Team team){
+            return this.getReadableDatabase().rawQuery( "SELECT * FROM team WHERE nameTeam=?", new String[] { team.getName() }  ).getCount();
+        }
+
 
             /***********************añadir partido **************************************/
         public void addMatch(Match match) {
             SQLiteDatabase db = this.getWritableDatabase();
             db.beginTransaction();
             try {
-                db.execSQL( "INSERT INTO match(localTeam, visitTeam, matchDay, localGoals, visitGoals, nameLeague) VALUES(?, ?, ?, ?, ?, ?)",
-                        new String[] { match.getLocalTeam(), match.getVisitTeam(), Integer.toString(match.getMatchDay()), Integer.toString(match.getLocalGoals()), Integer.toString(match.getVisitGoals()), match.getNameLeague()} );
+                db.execSQL( "INSERT INTO match(localTeam, visitTeam, matchDay, localGoals, visitGoals, finalizado, nameLeague) VALUES(?, ?, ?, ?, ?, ?, ?)",
+                        new String[] { match.getLocalTeam(), match.getVisitTeam(), Integer.toString(match.getMatchDay()), Integer.toString(match.getLocalGoals()), Integer.toString(match.getVisitGoals()), Integer.toString(match.getFinalizado()), match.getNameLeague()} );
                 db.setTransactionSuccessful();
             } finally {
                 db.endTransaction();
@@ -220,7 +229,7 @@ public class SqlIO extends SQLiteOpenHelper {
 
         if ( cursor.moveToFirst() ) {
             do {
-                toret.add( new Match( cursor.getString( 0 ),cursor.getString( 1 ),cursor.getInt(2),cursor.getInt(3),cursor.getInt(4),cursor.getString( 5 ) ));
+                toret.add( new Match( cursor.getString( 0 ),cursor.getString( 1 ),cursor.getInt(2),cursor.getInt(3),cursor.getInt(4), cursor.getInt(5),cursor.getString( 6 ) ));
             } while( cursor.moveToNext()  );
         }
 
@@ -243,6 +252,91 @@ public class SqlIO extends SQLiteOpenHelper {
 
         return;
     }
+
+    /********************set match*************************************************/
+    public void setMatch(Match match)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.beginTransaction();
+        try {
+            db.execSQL( "UPDATE match SET localGoals=?, visitGoals=?, finalizado=1 WHERE localTeam = ? AND visitTeam=?;",
+                    new String[] { Integer.toString(match.getLocalGoals()), Integer.toString(match.getVisitGoals()),  match.getLocalTeam(), match.getVisitTeam()} );
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+
+        return;
+    }
+
+    public void empate(String localTeam, String visitTeam){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.beginTransaction();
+        try {
+            db.execSQL( "UPDATE team SET points=points-1 WHERE nameTeam = ?;",
+                    new String[] { localTeam} );
+            db.execSQL( "UPDATE team SET points=points-1 WHERE nameTeam = ?;",
+                    new String[] { visitTeam} );
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+
+        return;
+    }
+
+    public void victoria(String localTeam, int localGoal, String visitTeam, int visitGoal){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.beginTransaction();
+        try {
+            db.execSQL( "UPDATE team SET points=points-3, gv=gv-? WHERE nameTeam = ?;",
+                    new String[] { Integer.toString(localGoal-visitGoal), localTeam} );
+            db.execSQL( "UPDATE team SET gv=gv+? WHERE nameTeam = ?;",
+                    new String[] { Integer.toString(localGoal-visitGoal), visitTeam} );
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return;
+    }
+
+    public void sumEmpate(String localTeam, String visitTeam){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.beginTransaction();
+        try {
+            db.execSQL( "UPDATE team SET points=points+1 WHERE nameTeam = ?;",
+                    new String[] { localTeam} );
+            db.execSQL( "UPDATE team SET points=points+1 WHERE nameTeam = ?;",
+                    new String[] { visitTeam} );
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+
+        return;
+    }
+
+    public void sumVictoria(String localTeam, int localGoal, String visitTeam, int visitGoal){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.beginTransaction();
+        try {
+            db.execSQL( "UPDATE team SET points=points+3, gv=gv+? WHERE nameTeam = ?;",
+                    new String[] { Integer.toString(localGoal-visitGoal), localTeam} );
+            db.execSQL( "UPDATE team SET gv=gv-? WHERE nameTeam = ?;",
+                    new String[] { Integer.toString(localGoal-visitGoal), visitTeam} );
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return;
+    }
+
+
 
 
 }

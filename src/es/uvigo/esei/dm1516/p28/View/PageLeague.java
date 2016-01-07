@@ -64,6 +64,11 @@ public class PageLeague extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch ( menuItem.getItemId() ) {
+            case R.id.Actualizar:
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+                break;
             case R.id.Calendario:
                 String nameLeague = league.getName() ;
                 Intent data = new Intent( this, Calendario.class );

@@ -2,9 +2,13 @@ package es.uvigo.esei.dm1516.p28.View;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import es.uvigo.esei.dm1516.p28.Core.Match;
 import es.uvigo.esei.dm1516.p28.Core.SqlIO;
@@ -15,6 +19,7 @@ import java.util.ArrayList;
 
 public class Calendario extends Activity {
     public static final String ETQ_NAME_LEAGUE = "name_league";
+    public static final String LOG_TAG = "Main";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,8 @@ public class Calendario extends Activity {
         SqlIO db = ( (App) this.getApplication() ).getDb();
 
         ArrayList<Match> matchDay1 = db.getPartidos(nameLeague, 1);
+
+
 
 
         /*************botones, textviews y TextView de jornada 1****************/
@@ -54,8 +61,6 @@ public class Calendario extends Activity {
 
 
         ArrayList<Match> matchDay2 = db.getPartidos(nameLeague, 2);
-
-
         /*************botones, textviews y TextView de jornada 1****************/
         TextView local1j2 = (TextView) this.findViewById( R.id.local1j2 );
         TextView visitante1j2 = (TextView) this.findViewById( R.id.visit1j2 );
@@ -82,10 +87,7 @@ public class Calendario extends Activity {
         }
 
 
-
         ArrayList<Match> matchDay3 = db.getPartidos(nameLeague, 3);
-
-
         /*************botones, textviews y TextView de jornada 1****************/
         TextView local1j3 = (TextView) this.findViewById( R.id.local1j3 );
         TextView visitante1j3 = (TextView) this.findViewById( R.id.visit1j3 );
@@ -114,8 +116,6 @@ public class Calendario extends Activity {
 
 
         ArrayList<Match> matchDay4 = db.getPartidos(nameLeague, 4);
-
-
         /*************botones, textviews y TextView de jornada 1****************/
         TextView local1j4 = (TextView) this.findViewById( R.id.local1j4 );
         TextView visitante1j4 = (TextView) this.findViewById( R.id.visit1j4 );
@@ -143,8 +143,6 @@ public class Calendario extends Activity {
 
 
         ArrayList<Match> matchDay5 = db.getPartidos(nameLeague, 5);
-
-
         /*************botones, textviews y TextView de jornada 1****************/
         TextView local1j5 = (TextView) this.findViewById( R.id.local1j5 );
         TextView visitante1j5 = (TextView) this.findViewById( R.id.visit1j5 );
@@ -170,10 +168,7 @@ public class Calendario extends Activity {
             i += 1;
         }
 
-
         ArrayList<Match> matchDay6 = db.getPartidos(nameLeague, 6);
-
-
         /*************botones, textviews y TextView de jornada 1****************/
         TextView local1j6 = (TextView) this.findViewById( R.id.local1j6 );
         TextView visitante1j6 = (TextView) this.findViewById( R.id.visit1j6 );
@@ -199,9 +194,10 @@ public class Calendario extends Activity {
             i += 1;
         }
 
+
+
+
         ArrayList<Match> matchDay7 = db.getPartidos(nameLeague, 7);
-
-
         /*************botones, textviews y TextView de jornada 1****************/
         TextView local1j7 = (TextView) this.findViewById( R.id.local1j7 );
         TextView visitante1j7 = (TextView) this.findViewById( R.id.visit1j7 );
@@ -228,9 +224,8 @@ public class Calendario extends Activity {
         }
 
 
+
         ArrayList<Match> matchDay8 = db.getPartidos(nameLeague, 8);
-
-
         /*************botones, textviews y TextView de jornada 1****************/
         TextView local1j8 = (TextView) this.findViewById( R.id.local1j8 );
         TextView visitante1j8 = (TextView) this.findViewById( R.id.visit1j8 );
@@ -256,10 +251,7 @@ public class Calendario extends Activity {
             i += 1;
         }
 
-
         ArrayList<Match> matchDay9 = db.getPartidos(nameLeague, 9);
-
-
         /*************botones, textviews y TextView de jornada 1****************/
         TextView local1j9 = (TextView) this.findViewById( R.id.local1j9 );
         TextView visitante1j9 = (TextView) this.findViewById( R.id.visit1j9 );
@@ -285,10 +277,7 @@ public class Calendario extends Activity {
             i += 1;
         }
 
-
         ArrayList<Match> matchDay10 = db.getPartidos(nameLeague, 10);
-
-
         /*************botones, textviews y TextView de jornada 1****************/
         TextView local1j10 = (TextView) this.findViewById( R.id.local1j10 );
         TextView visitante1j10 = (TextView) this.findViewById( R.id.visit1j10 );
@@ -314,20 +303,31 @@ public class Calendario extends Activity {
             i += 1;
         }
 
-
-
     }
 
     /***********menu barra superior con opciones de volver atras y salir********************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu( menu );
-        this.getMenuInflater().inflate( R.menu.menu_info, menu );
+        this.getMenuInflater().inflate( R.menu.menu_pagecalendario, menu );
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
+        String nameLeague = this.getIntent().getExtras().getString( ETQ_NAME_LEAGUE );
         switch ( menuItem.getItemId() ) {
+            case R.id.Clasificacion:
+                Intent data1 = new Intent( this, PageLeague.class );
+                data1.putExtra( PageLeague.ETQ_NAME_LEAGUE, nameLeague );
+                Log.v(LOG_TAG, String.format(" in pageLeague(): launching league for: '%s'", nameLeague));
+                this.startActivity(data1);
+                break;
+            case R.id.Resultados:
+                Intent data2 = new Intent( this, Resultados.class );
+                data2.putExtra( Resultados.ETQ_NAME_LEAGUE, nameLeague );
+                Log.v(LOG_TAG, String.format(" in pageLeague(): launching league for: '%s'", nameLeague));
+                this.startActivity(data2);
+                break;
             case R.id.atras:
                 finish();
                 break;

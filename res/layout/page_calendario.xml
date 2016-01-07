@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:id="@+id/svCalen" android:layout_gravity="center_horizontal" android:fillViewport="false">
 
 
         <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="207dp" android:layout_marginTop="50dp"
-                android:id="@+id/llCalen">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/llCalen" android:orientation="vertical">
 
             <!--                   jornada 1                                       -->
             <TextView
@@ -105,7 +104,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="JORNADA 2"
-                    android:id="@+id/textView1j2" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"/>
+                    android:id="@+id/textView1j2" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"
+                    android:layout_marginTop="45dp"/>
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/rlCalenj2">
@@ -188,7 +188,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="JORNADA 3"
-                    android:id="@+id/textView1j3" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"/>
+                    android:id="@+id/textView1j3" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"
+                    android:layout_marginTop="45dp"/>/>
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/rlCalenj3">
@@ -271,7 +272,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="JORNADA 4"
-                    android:id="@+id/textView1j4" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"/>
+                    android:id="@+id/textView1j4" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"
+                    android:layout_marginTop="45dp"/>/>
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/rlCalenj4">
@@ -354,7 +356,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="JORNADA 5"
-                    android:id="@+id/textView1j5" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"/>
+                    android:id="@+id/textView1j5" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"
+                    android:layout_marginTop="45dp"/>/>
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/rlCalenj5">
@@ -441,7 +444,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="JORNADA 6"
-                    android:id="@+id/textView6" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"/>
+                    android:id="@+id/textView6" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"
+                    android:layout_marginTop="45dp"/>/>
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/rlCalen6">
@@ -524,7 +528,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="JORNADA 7"
-                    android:id="@+id/textView1j7" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"/>
+                    android:id="@+id/textView1j7" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"
+                    android:layout_marginTop="45dp"/>/>
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/rlCalenj7">
@@ -607,7 +612,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="JORNADA 8"
-                    android:id="@+id/textView1j8" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"/>
+                    android:id="@+id/textView1j8" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"
+                    android:layout_marginTop="45dp"/>/>
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/rlCalenj8">
@@ -690,7 +696,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="JORNADA 9"
-                    android:id="@+id/textView1j9" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"/>
+                    android:id="@+id/textView1j9" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"
+                    android:layout_marginTop="45dp"/>/>
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/rlCalenj9">
@@ -773,7 +780,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="JORNADA 10"
-                    android:id="@+id/textView1j10" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"/>
+                    android:id="@+id/textView1j10" android:layout_gravity="center_horizontal" android:paddingBottom="10dp"
+                    android:layout_marginTop="45dp"/>/>
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/rlCalenj10">

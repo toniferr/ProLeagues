@@ -41,7 +41,7 @@ public class Team {
 
     @Override
     public String toString() {
-            return this.nameTeam+" -- "+this.points+" -- "+this.golaverage;
+            return this.nameTeam+"          "+this.points+"          "+this.golaverage;
         }
 
 }

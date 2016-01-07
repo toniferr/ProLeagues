@@ -6,14 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
-import android.widget.ListView;
+import android.view.*;
+import android.widget.*;
 import es.uvigo.esei.dm1516.p28.Core.League;
 import es.uvigo.esei.dm1516.p28.Core.Match;
 import es.uvigo.esei.dm1516.p28.Core.SqlIO;
@@ -30,38 +24,38 @@ public class Main extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.main );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
 
-        ListView lItems = (ListView) this.findViewById( R.id.lItems );
-        ImageButton btAdd = (ImageButton) this.findViewById( R.id.btAdd );
+        ListView lItems = (ListView) this.findViewById(R.id.lItems);
+        ImageButton btAdd = (ImageButton) this.findViewById(R.id.btAdd);
 
         /***********listview de las ligas creadas************************************/
-        lItems.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+        lItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Main.this.irVistaLiga( position );
+                Main.this.irVistaLiga(position);
             }
-        } );
+        });
 
-        this.listItems = ( (App) this.getApplication() ).getDb().getAllItems();  /****base de datos********/
+        this.listItems = ((App) this.getApplication()).getDb().getAllItems();  /****base de datos********/
         /******adaptador*************/
-        lItems.setAdapter( new ArrayAdapter(
+        lItems.setAdapter(new ArrayAdapter(
                 this,
                 android.R.layout.simple_list_item_1,
                 this.listItems
-        ) );
-        this.registerForContextMenu( lItems );
+        ));
+        this.registerForContextMenu(lItems);
 
         /************boton añadir una nueva liga***************************/
-        btAdd.setOnClickListener( new View.OnClickListener() {
+        btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Main.this.addNewLeague();
             }
-        } );
-    }
+        });
 
+    }
     /************menu contextual**********************************/
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
@@ -117,6 +111,7 @@ public class Main extends Activity {
                 Main.this.addNewLeague();
                 break;
             case R.id.info:
+                break;
                 case R.id.about:
                     Intent about= new Intent(getApplicationContext(), About.class);
                     startActivity(about);
@@ -190,111 +185,124 @@ public class Main extends Activity {
 
                 League league = new League( intent.getExtras().getString( InputLeague.ETQ_NAME ) );
 
-                db.add( league );
-
-                Team team1 = new Team (intent.getExtras().getString(InputLeague.ETQ_T1), intent.getExtras().getString(InputLeague.ETQ_U1), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
-                Team team2 = new Team (intent.getExtras().getString(InputLeague.ETQ_T2), intent.getExtras().getString(InputLeague.ETQ_U2), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
-                Team team3 = new Team (intent.getExtras().getString(InputLeague.ETQ_T3), intent.getExtras().getString(InputLeague.ETQ_U3), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
-                Team team4 = new Team (intent.getExtras().getString(InputLeague.ETQ_T4), intent.getExtras().getString(InputLeague.ETQ_U4), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
-                Team team5 = new Team (intent.getExtras().getString(InputLeague.ETQ_T5), intent.getExtras().getString(InputLeague.ETQ_U5), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
-                Team team6 = new Team (intent.getExtras().getString(InputLeague.ETQ_T6), intent.getExtras().getString(InputLeague.ETQ_U6), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
+                if (!league.getName().isEmpty()) {
+                    if (db.checkLeague(league) == 0) {
+                        db.add(league);
 
 
-               if (!intent.getExtras().getString(InputLeague.ETQ_T1).isEmpty()) {
-                   db.addTeam(team1);
-               }
-               if (!intent.getExtras().getString(InputLeague.ETQ_T2).isEmpty()) {
-                    db.addTeam(team2);
-               }
-               if (!intent.getExtras().getString(InputLeague.ETQ_T3).isEmpty()) {
-                    db.addTeam(team3);
-               }
-               if (!intent.getExtras().getString(InputLeague.ETQ_T4).isEmpty()) {
-                    db.addTeam(team4);
-               }
-               if (!intent.getExtras().getString(InputLeague.ETQ_T5).isEmpty()) {
-                    db.addTeam(team5);
-               }
-               if (!intent.getExtras().getString(InputLeague.ETQ_T6).isEmpty()) {
-                    db.addTeam(team6);
-               }
-
-                /***************crear emparejamiento***************/
-                int numEquipos = db.getCountTeams(intent.getExtras().getString(InputLeague.ETQ_NAME));
-                ArrayList<String> equipos = db.getNameTeams(intent.getExtras().getString(InputLeague.ETQ_NAME));
-
-                ArrayList<String> calendario = crearEmparejamientos(numEquipos, equipos);
+                        Team team1 = new Team (intent.getExtras().getString(InputLeague.ETQ_T1), intent.getExtras().getString(InputLeague.ETQ_U1), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
+                        Team team2 = new Team (intent.getExtras().getString(InputLeague.ETQ_T2), intent.getExtras().getString(InputLeague.ETQ_U2), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
+                        Team team3 = new Team (intent.getExtras().getString(InputLeague.ETQ_T3), intent.getExtras().getString(InputLeague.ETQ_U3), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
+                        Team team4 = new Team (intent.getExtras().getString(InputLeague.ETQ_T4), intent.getExtras().getString(InputLeague.ETQ_U4), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
+                        Team team5 = new Team (intent.getExtras().getString(InputLeague.ETQ_T5), intent.getExtras().getString(InputLeague.ETQ_U5), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
+                        Team team6 = new Team (intent.getExtras().getString(InputLeague.ETQ_T6), intent.getExtras().getString(InputLeague.ETQ_U6), 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
 
 
-                int i = 0;
-                int j = 0;
-                int totalJP = numEquipos;
+                        if (!intent.getExtras().getString(InputLeague.ETQ_T1).isEmpty()) {
+                            if  (db.checkTeam(team1) == 0) {
+                                db.addTeam(team1);
+                            }else{
+                                Toast t = Toast.makeText( getApplicationContext(), "No se ha podido crear el equipo " +team1.getName() , Toast.LENGTH_LONG );
+                                t.setGravity(
+                                        Gravity.CENTER | Gravity.CENTER, 0, 0 );
+                                t.show();
+                            }
+                        }
+                        if (!intent.getExtras().getString(InputLeague.ETQ_T2).isEmpty()) {
+                            if (db.checkTeam(team2) == 0) {
+                                db.addTeam(team2);
+                            }else{
+                                Toast t = Toast.makeText( getApplicationContext(), "No se ha podido crear el equipo " +team2.getName() , Toast.LENGTH_LONG );
+                                t.setGravity(
+                                        Gravity.CENTER | Gravity.CENTER, 0, 0 );
+                                t.show();
+                            }
+                        }
+                        if (!intent.getExtras().getString(InputLeague.ETQ_T3).isEmpty()) {
+                            if  (db.checkTeam(team3) == 0) {
+                                db.addTeam(team3);
+                            }else{
+                                Toast t = Toast.makeText( getApplicationContext(), "No se ha podido crear el equipo " +team3.getName() , Toast.LENGTH_LONG );
+                                t.setGravity(
+                                        Gravity.CENTER | Gravity.CENTER, 0, 0 );
+                                t.show();
+                            }
+                        }
+                        if (!intent.getExtras().getString(InputLeague.ETQ_T4).isEmpty()) {
+                            if(db.checkTeam(team4) == 0) {
+                                db.addTeam(team4);
+                            }else{
+                                Toast t = Toast.makeText( getApplicationContext(), "No se ha podido crear el equipo " +team4.getName() , Toast.LENGTH_LONG );
+                                t.setGravity(
+                                        Gravity.CENTER | Gravity.CENTER, 0, 0 );
+                                t.show();
+                            }
+                        }
+                        if (!intent.getExtras().getString(InputLeague.ETQ_T5).isEmpty()) {
+                            if  (db.checkTeam(team5) == 0) {
+                                db.addTeam(team5);
+                            }else{
+                                Toast t = Toast.makeText( getApplicationContext(), "No se ha podido crear el equipo " +team5.getName() , Toast.LENGTH_LONG );
+                                t.setGravity(
+                                        Gravity.CENTER | Gravity.CENTER, 0, 0 );
+                                t.show();
+                            }
+                        }
+                        if (!intent.getExtras().getString(InputLeague.ETQ_T6).isEmpty()) {
+                            if  (db.checkTeam(team6) == 0) {
+                                db.addTeam(team6);
+                            }else{
+                                Toast t = Toast.makeText( getApplicationContext(), "No se ha podido crear el equipo " +team6.getName() , Toast.LENGTH_LONG );
+                                t.setGravity(
+                                        Gravity.CENTER | Gravity.CENTER, 0, 0 );
+                                t.show();
+                            }
+                        }
 
-                boolean impar = (totalJP%2 != 0);
-                if (impar){ --totalJP; }
+                        /***************crear emparejamiento***************/
+                        int numEquipos = db.getCountTeams(intent.getExtras().getString(InputLeague.ETQ_NAME));
+                        ArrayList<String> equipos = db.getNameTeams(intent.getExtras().getString(InputLeague.ETQ_NAME));
 
-                String localteam="";
-                String visitteam="";
-                int jornada = 0;
-                for (String partido: calendario){
-                    if ((totalJP*j) == i){
-                        jornada = j+1;
-                        j++;
-                    }
-                    if ((i%2) == 0){
-                        localteam = partido;
+                        ArrayList<String> calendario = crearEmparejamientos(numEquipos, equipos);
+
+
+                        int i = 0;
+                        int j = 0;
+                        int totalJP = numEquipos;
+
+                        boolean impar = (totalJP%2 != 0);
+                        if (impar){ --totalJP; }
+
+                        String localteam="";
+                        String visitteam="";
+                        int jornada = 0;
+                        for (String partido: calendario){
+                            if ((totalJP*j) == i){
+                                jornada = j+1;
+                                j++;
+                            }
+                            if ((i%2) == 0){
+                                localteam = partido;
+                            }else{
+                                visitteam = partido;
+                                Match match = new Match(localteam, visitteam, jornada, 0, 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
+                                db.addMatch(match);
+                            }
+
+                            i++;
+                        }
+
+
+                        this.listItems.add( league );
+                        ( (ArrayAdapter) lItems.getAdapter() ).notifyDataSetChanged();
                     }else{
-                        visitteam = partido;
-                        Match match = new Match(localteam, visitteam, jornada, 0, 0, intent.getExtras().getString(InputLeague.ETQ_NAME) );
-                        db.addMatch(match);
+                        Toast t = Toast.makeText( getApplicationContext(), "Ya existe una liga con este nombre " +league.getName() , Toast.LENGTH_LONG );
+                        t.setGravity(
+                                Gravity.CENTER | Gravity.CENTER, 0, 0 );
+                        t.show();
                     }
-
-                    i++;
                 }
 
-                /*******jornada1****/
-                /*Match match1j1 = new Match();
-                Match match2j1 = new Match();
-                Match match3j1 = new Match();*/
-                /*******jornada2****/
-                /*Match match1j2 = new Match();
-                Match match2j2 = new Match();
-                Match match3j2 = new Match();*/
-                /*******jornada3****/
-                /*Match match1j3 = new Match();
-                Match match2j3 = new Match();
-                Match match3j3 = new Match();*/
-                /*******jornada4****/
-                /*Match match1j4 = new Match();
-                Match match2j4 = new Match();
-                Match match3j4 = new Match();*/
-                /*******jornada5****/
-                /*Match match1j5 = new Match();
-                Match match2j5 = new Match();
-                Match match3j5 = new Match();*/
-                /*******jornada6****/
-                /*Match match1j6 = new Match();
-                Match match2j6 = new Match();
-                Match match3j6 = new Match();*/
-                /*******jornada7****/
-                /*Match match1j7 = new Match();
-                Match match2j7 = new Match();
-                Match match3j7 = new Match();*/
-                /*******jornada8****/
-                /*Match match1j8 = new Match();
-                Match match2j8 = new Match();
-                Match match3j8 = new Match();*/
-                /*******jornada9****/
-                /*Match match1j9 = new Match();
-                Match match2j9 = new Match();
-                Match match3j9 = new Match();*/
-                /*******jornada10****/
-                /*Match match1j10 = new Match();
-                Match match2j10 = new Match();
-                Match match3j10 = new Match();*/
-
-                this.listItems.add( league );
-                ( (ArrayAdapter) lItems.getAdapter() ).notifyDataSetChanged();
             }
         }
         return;
